@@ -6,12 +6,14 @@ Mythosaur is a Windows forensic scanner built for Minecraft Java Edition screens
 
 ## How to Use
 
-1. **Run `Mythosaur.exe` as Administrator.**
+1. **Run `Mythosaur.exe` as Administrator** (recommended for full process memory, Prefetch, USN Journal, and kernel-level checks).
+   - Mythosaur works **with or without Minecraft open** — running it while Minecraft is open enables live JVM, classloader, and mod scans; running it offline skips default mod scanning and runs full system/forensic checks.
 2. **Enter your 6-digit Scan Code**:
    - Launching Mythosaur generates a unique **6-digit code** tied to your PC name in the Discord code channel.
    - Each code is valid for **10 minutes**. Once used, the code is crossed out in Discord; if you close the app before scanning, the pending code is automatically removed.
 3. **Click `Start Scan`** (or press `Enter`).
 4. **View Results**:
+   - When the scan finishes, Mythosaur opens the interactive results viewer, saves `MythosaurResults.html` locally, and automatically sends the report to Discord.
 
 ### How to Get a Scan Code
 
@@ -37,7 +39,8 @@ Start in **Overview**, then open the category that reported the finding. Bracket
 
 | Detection | Explanation |
 | --- | --- |
-| **2-PC Network & Serial Bridges** | Flags non-browser processes maintaining established LAN/RFC1918 connections on non-standard ports or USB-to-serial / microcontroller bridges (KMBox, Makcu, CH340, CP210x, FTDI, Arduino, RP2040) commonly used in 2-PC / Faker proxy setups. |
+| **Faker / 2-PC MITM Proxy** | Detects `o1seth/faker` and 2-PC Windows Mobile Hotspot MITM proxies on the clean PC — checks for Windows ICS hotspot gateways (`192.168.137.x`), Windows PCs acting as hotspot routers (TTL=128 + Wi-Fi Direct locally-administered MAC or open Windows RPC/SMB ports, catching Faker's DHCP bypass), and `javaw.exe` connections to local/LAN port `25565`. |
+| **2-PC Network & Serial Bridges** | Flags non-browser processes maintaining established LAN/RFC1918 connections on non-standard ports or USB-to-serial / microcontroller bridges (KMBox, Makcu, CH340, CP210x, FTDI, Arduino, RP2040) commonly used in 2-PC setups. |
 | **Private Proxies & Tunnels** | Flags active Windows system proxies, `HTTP_PROXY`/`HTTPS_PROXY` variables, `netsh portproxy` rules, local proxy listeners, or active tunnel clients (`v2ray`, `xray`, `clash`, `sing-box`, `proxifier`, `ngrok`, `cloudflared`, `frpc`). |
 | **Network Drives & Remote Shares** | Lists mapped SMB/WebDAV network drives (`HKCU\Network`) or active WebDAV/UNC executions that can run cheats from a second PC or remote share without writing locally. |
 | **NTFS Alternate Data Streams (ADS)** | Scans user and Minecraft directories for hidden NTFS Alternate Data Streams. Flags executable, DLL, script, or JAR (`MZ`/`PK`) payloads hidden inside ADS as **BAN**, and other non-standard streams as **INVESTIGATE**. |
@@ -80,7 +83,7 @@ Start in **Overview**, then open the category that reported the finding. Bracket
 | --- | --- |
 | **BAN DEFINITIVE — Mythosaur has detected cheats in the current Minecraft instance.** | Mythosaur confirmed prohibited functionality or verified runtime cheat/injection evidence in the Minecraft instance being scanned. Pinned at the very top of Overview and InjectionFucker. |
 | **Dump cross-reference: [finding]** | Cross-references live JNI/JVMTI/module checks against kernel/RAM dump findings (manually mapped drivers, reflective PE injection, unbacked threads, external handles, unloaded modules, self-destruct remnants) that survive self-destruct. |
-| **[Count] Unknown Classes** | The report could not match some loaded pieces of Java code to an expected source. Open the card, check the class names and listed sources, and compare against the same Minecraft version, launcher, mod loader, and modpack. |
+| **[Count] Unknown Classes** | The report could not match some loaded pieces of Java code to an expected source. Open the card, check the class names and listed sources, and compare against the same Minecraft version, launcher, mod loader, and modpack. **Do not ban on Unknown Classes alone, even when the count is high.** |
 | **Faked Classes inside of net.minecraft** | A class uses a Minecraft package name unexpectedly. Check the exact game version and the listed owner. Corroborate before banning. |
 | **Class Anomalies** | A Java class has an unusual identity or origin. Check its name, source, and whether the installed modpack accounts for it. Corroborate. |
 | **Replacement Attacks** | The report flags a game file or component as a possible replacement. Verify the exact version, its expected source, and whether the game used it. Corroborate. |
