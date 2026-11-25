@@ -37,8 +37,7 @@ Start in **Overview**, then open the category that reported the finding. Bracket
 
 | Detection | Explanation |
 | --- | --- |
-| **Process Masquerading / Fakers** | A running user-space executable’s filename does not match its embedded PE `OriginalFilename`. Check the actual path and embedded metadata to see if a cheat or injector was renamed to look like a benign app. |
-| **2-PC Network & Serial Bridges** | Flags non-browser processes maintaining established LAN/RFC1918 connections on non-standard ports or USB-to-serial / microcontroller bridges (KMBox, Makcu, CH340, CP210x, FTDI, Arduino, RP2040) commonly used in 2-PC setups. |
+| **2-PC Network & Serial Bridges** | Flags non-browser processes maintaining established LAN/RFC1918 connections on non-standard ports or USB-to-serial / microcontroller bridges (KMBox, Makcu, CH340, CP210x, FTDI, Arduino, RP2040) commonly used in 2-PC / Faker proxy setups. |
 | **Private Proxies & Tunnels** | Flags active Windows system proxies, `HTTP_PROXY`/`HTTPS_PROXY` variables, `netsh portproxy` rules, local proxy listeners, or active tunnel clients (`v2ray`, `xray`, `clash`, `sing-box`, `proxifier`, `ngrok`, `cloudflared`, `frpc`). |
 | **Network Drives & Remote Shares** | Lists mapped SMB/WebDAV network drives (`HKCU\Network`) or active WebDAV/UNC executions that can run cheats from a second PC or remote share without writing locally. |
 | **NTFS Alternate Data Streams (ADS)** | Scans user and Minecraft directories for hidden NTFS Alternate Data Streams. Flags executable, DLL, script, or JAR (`MZ`/`PK`) payloads hidden inside ADS as **BAN**, and other non-standard streams as **INVESTIGATE**. |
@@ -161,7 +160,7 @@ Scans **both** disk JARs (mods, nested JARs, `-javaagent`/`-cp` JARs) **and** li
 | **Fileless remote script loader ([program])** | The report flags activity involving a remotely supplied script fetched and executed in memory. |
 | **[Packer] program [name] ran** | An executable was flagged as packed (PyInstaller, compiled AHK/AutoIt, Node pkg) and associated with execution. Check bundled input-automation modules. |
 | **[Vendor]: [profile]** | A named peripheral profile, Lua script, rapid-fire macro, or config modification/deletion (Logitech G HUB, Razer Synapse, Corsair iCUE, SteelSeries GG, Bloody, Glorious Core, HyperX, ROCCAT, Redragon, X-Mouse, reWASD). |
-| **[Vendor] macro remnant in RAM/kernel dump** | Removed or in-memory peripheral macro artifact recovered from memory dump correlation. |
+| **[Vendor] deleted macro remnant in RAM/kernel dump** | Deleted peripheral macro file or inline Lua macro artifact recovered from memory dump correlation. |
 | **Low debounce** | A peripheral setting affects how quickly it registers input. Compare it with any specific server rule. |
 | **Hardware macro device** | A device associated with programmable input was flagged. Confirm the device and check for evidence of prohibited use. |
 | **Interception input-injection driver** | Interception was installed or loaded. Check the reported status and whether a specific program used it with Minecraft. |
