@@ -6,14 +6,12 @@ Mythosaur is a Windows forensic scanner built for Minecraft Java Edition screens
 
 ## How to Use
 
-1. **Run `Mythosaur.exe` as Administrator** (recommended for full process memory, Prefetch, USN Journal, and kernel-level checks).
-   - Mythosaur works **with or without Minecraft open** — running it while Minecraft is open enables live JVM, classloader, and mod scans; running it offline skips default mod scanning and runs full system/forensic checks.
+1. **Run `Mythosaur.exe` as Administrator.**
 2. **Enter your 6-digit Scan Code**:
    - Launching Mythosaur generates a unique **6-digit code** tied to your PC name in the Discord code channel.
    - Each code is valid for **10 minutes**. Once used, the code is crossed out in Discord; if you close the app before scanning, the pending code is automatically removed.
 3. **Click `Start Scan`** (or press `Enter`).
 4. **View Results**:
-   - When the scan finishes, Mythosaur opens the interactive results viewer, saves `MythosaurResults.html` locally, and automatically sends the report to Discord.
 
 ### How to Get a Scan Code
 
@@ -83,7 +81,7 @@ Start in **Overview**, then open the category that reported the finding. Bracket
 | --- | --- |
 | **BAN DEFINITIVE — Mythosaur has detected cheats in the current Minecraft instance.** | Mythosaur confirmed prohibited functionality or verified runtime cheat/injection evidence in the Minecraft instance being scanned. Pinned at the very top of Overview and InjectionFucker. |
 | **Dump cross-reference: [finding]** | Cross-references live JNI/JVMTI/module checks against kernel/RAM dump findings (manually mapped drivers, reflective PE injection, unbacked threads, external handles, unloaded modules, self-destruct remnants) that survive self-destruct. |
-| **[Count] Unknown Classes** | The report could not match some loaded pieces of Java code to an expected source. Open the card, check the class names and listed sources, and compare against the same Minecraft version, launcher, mod loader, and modpack. **Do not ban on Unknown Classes alone, even when the count is high.** |
+| **[Count] Unknown Classes** | The report could not match some loaded pieces of Java code to an expected source. Open the card, check the class names and listed sources, and compare against the same Minecraft version, launcher, mod loader, and modpack. |
 | **Faked Classes inside of net.minecraft** | A class uses a Minecraft package name unexpectedly. Check the exact game version and the listed owner. Corroborate before banning. |
 | **Class Anomalies** | A Java class has an unusual identity or origin. Check its name, source, and whether the installed modpack accounts for it. Corroborate. |
 | **Replacement Attacks** | The report flags a game file or component as a possible replacement. Verify the exact version, its expected source, and whether the game used it. Corroborate. |
