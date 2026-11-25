@@ -20,6 +20,8 @@ Access to scan codes is available to:
 - **Server Boosters**
 - **Anyone who stars this repository** (`⭐ Star` at the top right of this page)
 
+Here is the discord: https://discord.gg/z33yQ58QTk
+
 ---
 
 ## Reading the Report
